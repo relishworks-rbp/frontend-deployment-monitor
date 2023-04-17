@@ -2,7 +2,7 @@
   "name": "netlify-retry-function",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "deploymentMonitor.js",
   "scripts": {
     "start": "npx functions-framework --target=deploymentMonitor",
     "watch-function": "nodemon --exec \"npm run start\""
