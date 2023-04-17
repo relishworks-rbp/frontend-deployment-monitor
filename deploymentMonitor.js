@@ -7,6 +7,12 @@ const TOKEN = process.env.NETLIFY_TOKEN;
 const PROD_SITE_ID = process.env.NETFLIFY_PROD_SITE_ID;
 const BUILD_HOOK_ENDPOINT = process.env.BUILD_HOOK_ENDPOINT;
 
+/**
+ * HTTP function that declares a variable.
+ *
+ * @param {Object} req request context.
+ * @param {Object} res response context.
+ */
 functions.http("deploymentMonitor", async (req, res) => {
   if (!BASE_URL || !TOKEN || !PROD_SITE_ID || !BUILD_HOOK_ENDPOINT) {
     return res.status(500).send("Function environment variables are misising!");
