@@ -24,24 +24,25 @@ exports.deploymentMonitor = async (req, res) => {
       method: "GET",
     });
 
-    if (data) {
-      const deployment = data[0];
+    if (data[0]) {
+      const { state, id } = data[0];
 
-      if (deployment.state === "ready" || "building" || "new" || "enqueued") {
+      if (
+        state === "ready" &&
+        state === "building" &&
+        state === "new" &&
+        state === "enqueued"
+      ) {
         const deploymentMessageStatus =
-          deployment.state === "ready" ? "successful" : deployment.state;
+          state === "ready" ? "successful" : state;
 
         return res
           .status(200)
-          .send(
-            `Recent Deployment ${deployment?.id} ${deploymentMessageStatus}`
-          );
+          .send(`Recent Deployment ${id} ${deploymentMessageStatus}`);
       }
 
       const retyData = await Axios(
-        `${BUILD_HOOK_ENDPOINT}?clear_cache=true&trigger_title=Retrigger failed deploy #${
-          deployment?.id
-        } at ${new Date()}`,
+        `${BUILD_HOOK_ENDPOINT}?clear_cache=true&trigger_title=Retrigger failed deploy #${id} at ${new Date()}`,
         {
           method: "POST",
           data: "{}",
@@ -50,13 +51,9 @@ exports.deploymentMonitor = async (req, res) => {
 
       return res
         .status(retyData?.status)
-        .send(`Retrigger failed deploy #${deployment?.id} at ${new Date()}`);
+        .send(`Retrigger failed deploy #${id} at ${new Date()}`);
     }
   } catch (error) {
     return res.status(500).send(error);
   }
 };
-
-// functions.http("deploymentMonitor", async () => {
-
-// });
