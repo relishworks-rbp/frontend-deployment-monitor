@@ -1,11 +1,10 @@
 {
   "name": "netlify-retry-function",
   "version": "1.0.0",
-  "description": "",
-  "main": "deploymentMonitor.js",
+  "description": "A serverless application to monitor BoH frontend application deployments on Netlify and redeploy and notify the team for failing builds at intervals",
   "scripts": {
     "start": "npx functions-framework --target=deploymentMonitor",
-    "watch-function": "nodemon --exec \"npm run start\""
+    "run:function": "nodemon --exec \"npm run start\""
   },
   "keywords": [],
   "author": "",

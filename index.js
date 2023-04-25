@@ -13,7 +13,7 @@ const BUILD_HOOK_ENDPOINT = process.env.BUILD_HOOK_ENDPOINT;
  * @param {Object} req request context.
  * @param {Object} res response context.
  */
-functions.http("deploymentMonitor", async (req, res) => {
+exports.deploymentMonitor = async (req, res) => {
   if (!BASE_URL || !TOKEN || !PROD_SITE_ID || !BUILD_HOOK_ENDPOINT) {
     return res.status(500).send("Function environment variables are misising!");
   }
@@ -55,4 +55,8 @@ functions.http("deploymentMonitor", async (req, res) => {
   } catch (error) {
     return res.status(500).send(error);
   }
-});
+};
+
+// functions.http("deploymentMonitor", async () => {
+
+// });
