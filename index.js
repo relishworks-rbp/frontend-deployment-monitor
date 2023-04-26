@@ -28,9 +28,9 @@ exports.deploymentMonitor = async (req, res) => {
       const { state, id } = data[0];
 
       if (
-        state === "ready" &&
-        state === "building" &&
-        state === "new" &&
+        state === "ready" ||
+        state === "building" ||
+        state === "new" ||
         state === "enqueued"
       ) {
         const deploymentMessageStatus =
